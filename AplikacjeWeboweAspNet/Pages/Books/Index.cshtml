@@ -1,0 +1,37 @@
+﻿@page
+@model AplikacjeWeboweAspNet.Pages.Books.IndexModel
+@{
+    ViewData["Title"] = "List of books";
+}
+
+<div class="d-flex justify-content-between align-items-center my-4">
+<h1>List of Books</h1>
+<a class="btn btn-primary btn-sm" asp-page="Create">New Book</a>
+</div>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ListBooks[0].Title)
+            </th>
+            <th> @Html.DisplayNameFor(model => model.ListBooks[0].Author)</th>
+            <th> @Html.DisplayNameFor(model => model.ListBooks[0].ReleaseDate)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var book in Model.ListBooks)
+{
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.ReleaseDate.ToShortDateString()</td>
+                    <td>
+                        <a asp-page="Details" asp-route-id="@book.Id" class="btn btn-outline-primary btn-sm">Details</a>
+                        <a asp-page="Edit" asp-route-id="@book.Id" class="btn btn-outline-primary btn-sm" >Edit</a>
+                        <a asp-page="Delete" asp-route-id="@book.Id" class="btn btn-outline-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+}
+    </tbody>
+</table>

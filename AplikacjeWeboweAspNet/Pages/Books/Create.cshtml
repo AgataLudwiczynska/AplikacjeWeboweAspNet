@@ -1,0 +1,49 @@
+﻿@page
+@model AplikacjeWeboweAspNet.Pages.Books.CreateModel
+@{
+    ViewData["Title"] = "Add new book";
+}
+
+
+<div class="row justify-content-center">
+    <div class="col-md-9 col-lg-6">
+        <h1 class="my-4">Add new book</h1>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-2 form-group">
+                <label asp-for="Book.Title" class="form-label"></label>
+                <input asp-for="Book.Title" class="form-control" />
+                <span asp-validation-for="Book.Title" class="text-danger"></span>
+            </div>
+            <div class="mb-2 form-group">
+                <label asp-for="Book.Author" class="form-label"></label>
+                <input asp-for="Book.Author" class="form-control" />
+                <span asp-validation-for="Book.Author" class="text-danger"></span>
+            </div>
+            <div class="mb-2 form-group">
+                <label asp-for="Book.PublishingHouse" class="form-label"></label>
+                <input asp-for="Book.PublishingHouse" class="form-control" />
+                <span asp-validation-for="Book.PublishingHouse" class="text-danger"></span>
+            </div>
+            <div class="mb-2 form-group">
+                <label asp-for="Book.ReleaseDate" class="form-label"></label>
+                <input asp-for="Book.ReleaseDate" class="form-control" />
+                <span asp-validation-for="Book.ReleaseDate" class="text-danger"></span>
+            </div>
+            <div class="mb-2 form-group">
+                <label asp-for="Book.NumberOfPage" class="form-label"></label>
+                <input asp-for="Book.NumberOfPage" class="form-control" />
+                <span asp-validation-for="Book.NumberOfPage" class="text-danger"></span>
+            </div>
+            <div class="flex justify-content-start gap-3 mt-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a asp-page="Index" class="btn btn-outline-primary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

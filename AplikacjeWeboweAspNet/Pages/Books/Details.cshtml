@@ -1,0 +1,47 @@
+﻿@page
+@model AplikacjeWeboweAspNet.Pages.Books.DetailsModel
+@{
+    ViewData["Title"] = "Book's details";
+}
+
+
+<h1 class="my-4">Details about book - @Model.Book.Title</h1>
+<div class="flex gap-3 mb-3">
+    <a asp-page="Index" class="btn btn-outline-primary">Back to list</a>
+    <a asp-page="Edit" asp-route-id="@Model.Book.Id" class="btn btn-outline-primary">Edit</a>
+    <a asp-page="Delete" asp-route-id="@Model.Book.Id" class="btn btn-outline-danger">Delete</a>
+</div>
+<hr />
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Book.Title)
+    </dt>
+    <dd class="col-sm-10">
+        @Model.Book.Title
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Book.Author)
+    </dt>
+    <dd class="col-sm-10">
+        @Model.Book.Author
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Book.PublishingHouse)
+    </dt>
+    <dd class="col-sm-10">
+        @Model.Book.PublishingHouse
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Book.ReleaseDate)
+    </dt>
+    <dd class="col-sm-10">
+        @Model.Book.ReleaseDate.ToShortDateString()
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Book.NumberOfPage)
+    </dt>
+    <dd class="col-sm-10">
+        @Model.Book.NumberOfPage
+    </dd>
+</dl>
+
