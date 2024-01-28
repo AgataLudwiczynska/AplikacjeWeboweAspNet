@@ -10,16 +10,17 @@
         <h1 class="my-4">Edit Book</h1>
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Book.Id" />
+            <input type="hidden" asp-for="Book.ID" />
             <div class="mb-2 form-label">
                 <label asp-for="Book.Title" class="form-label"></label>
                 <input asp-for="Book.Title" class="form-control" />
                 <span asp-validation-for="Book.Title" class="text-danger"></span>
             </div>
             <div class="mb-2 form-label">
-                <label asp-for="Book.Author" class="form-label"></label>
-                <input asp-for="Book.Author" class="form-control" />
-                <span asp-validation-for="Book.Author" class="text-danger"></span>
+                <label asp-for="Book.Author" class="control-label"></label>
+                <select asp-for="Book.AuthorID" class="form-control"
+                        asp-items="@Model.AuthorNameSL"></select>
+                <span asp-validation-for="Book.AuthorID" class="text-danger"></span>
             </div>
             <div class="mb-2 form-label">
                 <label asp-for="Book.PublishingHouse" class="form-label"></label>
@@ -37,8 +38,8 @@
                 <span asp-validation-for="Book.NumberOfPage" class="text-danger"></span>
             </div>
             <div class="flex justify-content-start gap-3 mt-4">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <a asp-page="Index" class="btn btn-outline-primary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a asp-page="Index" class="btn btn-outline-primary">Cancel</a>
             </div>
         </form>
     </div>

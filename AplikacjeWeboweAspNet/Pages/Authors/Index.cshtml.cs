@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace AplikacjeWeboweAspNet.Pages.Books
+namespace AplikacjeWeboweAspNet.Pages.Authors
 {
 	public class IndexModel : PageModel
     {
@@ -19,17 +19,14 @@ namespace AplikacjeWeboweAspNet.Pages.Books
             _appDbContext = appDbContext;
         }
 
-        public IList<Book> ListBooks { get; set; } = default!;
+        public IList<Author> ListAuthors { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_appDbContext.Books != null)
+            if(_appDbContext.Authors != null)
             {
-                ListBooks = await _appDbContext.Books.Include(c => c.Author)
-                .AsNoTracking()
-                .ToListAsync();
+                ListAuthors = await _appDbContext.Authors.ToListAsync();
             }
-
         }
     }
 }

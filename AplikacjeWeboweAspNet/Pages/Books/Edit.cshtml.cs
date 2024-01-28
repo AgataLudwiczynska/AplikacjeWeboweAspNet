@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AplikacjeWeboweAspNet.Pages.Books
 {
-	public class EditModel : PageModel
+    public class EditModel : AuthorNamePageModel
     {
         private readonly AppDbContext _appDbContext;
 
@@ -29,46 +29,41 @@ namespace AplikacjeWeboweAspNet.Pages.Books
                 return NotFound();
             }
 
-            var book = await _appDbContext.Books.FirstOrDefaultAsync(b => b.Id == id);
+            var book = await _appDbContext.Books.Include(b => b.Author).FirstOrDefaultAsync(b => b.ID == id);
             if (book == null)
             {
                 return NotFound();
             }
             Book = book;
+            PopulateAuthorsDropdownList(_appDbContext, Book.AuthorID);
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            _appDbContext.Attach(Book).State = EntityState.Modified;
+            var bookToUpdate = await _appDbContext.Books.FindAsync(id);
 
-            try
+            if (bookToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            if (await TryUpdateModelAsync<Book>(
+                 bookToUpdate,
+                 "book",
+                  s => s.ID, s => s.AuthorID, s => s.Title, s => s.PublishingHouse, s => s.ReleaseDate, s => s.NumberOfPage))
             {
                 await _appDbContext.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MiastoExists(Book.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToPage("./Index");
             }
 
-            return RedirectToPage("./Index");
-        }
-
-        private bool MiastoExists(int id)
-        {
-            return (_appDbContext.Books?.Any(e => e.Id == id)).GetValueOrDefault();
+            PopulateAuthorsDropdownList(_appDbContext, bookToUpdate.AuthorID);
+            return Page();
         }
     }
 }

@@ -24,12 +24,12 @@
 {
                 <tr>
                     <td>@book.Title</td>
-                    <td>@book.Author</td>
+                    <td>@book.Author.FirstName @book.Author.LastName</td>
                     <td>@book.ReleaseDate.ToShortDateString()</td>
                     <td>
-                        <a asp-page="Details" asp-route-id="@book.Id" class="btn btn-outline-primary btn-sm">Details</a>
-                        <a asp-page="Edit" asp-route-id="@book.Id" class="btn btn-outline-primary btn-sm" >Edit</a>
-                        <a asp-page="Delete" asp-route-id="@book.Id" class="btn btn-outline-danger btn-sm">Delete</a>
+                        <a asp-page="Details" asp-route-id="@book.ID" class="btn btn-outline-primary btn-sm">Details</a>
+                        <a asp-page="Edit" asp-route-id="@book.ID" class="btn btn-outline-primary btn-sm" >Edit</a>
+                        <a asp-page="Delete" asp-route-id="@book.ID" class="btn btn-outline-danger btn-sm">Delete</a>
                     </td>
                 </tr>
 }

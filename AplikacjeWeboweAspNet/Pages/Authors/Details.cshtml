@@ -1,0 +1,40 @@
+﻿@page
+@model AplikacjeWeboweAspNet.Pages.Authors.DetailsModel
+@{
+    ViewData["Title"] = "Author's details";
+}
+
+<h1 class="my-4">Details about author</h1>
+<div class="flex gap-3 mb-3">
+    <a asp-page="Index" class="btn btn-outline-primary">Back to list</a>
+    <a asp-page="Edit" asp-route-id="@Model.Author.ID" class="btn btn-outline-primary">Edit</a>
+    <a asp-page="Delete" asp-route-id="@Model.Author.ID" class="btn btn-outline-danger">Delete</a>
+</div>
+<hr />
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Author.FirstName)
+    </dt>
+    <dd class="col-sm-10">
+        @Model.Author.FirstName
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Author.LastName)
+    </dt>
+    <dd class="col-sm-10">
+        @Model.Author.LastName
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Author.DateOfBirth)
+    </dt>
+    <dd class="col-sm-10">
+        @Model.Author.DateOfBirth.ToShortDateString()
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Author.DateOfDeath)
+    </dt>
+    <dd class="col-sm-10">
+        @Model.Author.DateOfDeath?.ToShortDateString()
+    </dd>
+</dl>
+

@@ -3,6 +3,7 @@ using System;
 using AplikacjeWeboweAspNet.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AplikacjeWeboweAspNet.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231206182114_Add AuthorId in Book model")]
+    partial class AddAuthorIdinBookmodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +24,7 @@ namespace AplikacjeWeboweAspNet.Migrations
 
             modelBuilder.Entity("AplikacjeWeboweAspNet.Models.Author", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -39,18 +42,18 @@ namespace AplikacjeWeboweAspNet.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Authors");
                 });
 
             modelBuilder.Entity("AplikacjeWeboweAspNet.Models.Book", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("AuthorID")
+                    b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
                     b.Property<int>("NumberOfPage")
@@ -67,9 +70,9 @@ namespace AplikacjeWeboweAspNet.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("AuthorID");
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Books");
                 });
@@ -77,17 +80,12 @@ namespace AplikacjeWeboweAspNet.Migrations
             modelBuilder.Entity("AplikacjeWeboweAspNet.Models.Book", b =>
                 {
                     b.HasOne("AplikacjeWeboweAspNet.Models.Author", "Author")
-                        .WithMany("Books")
-                        .HasForeignKey("AuthorID")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Author");
-                });
-
-            modelBuilder.Entity("AplikacjeWeboweAspNet.Models.Author", b =>
-                {
-                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }
