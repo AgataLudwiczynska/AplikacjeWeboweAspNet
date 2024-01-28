@@ -1,0 +1,39 @@
+﻿@page
+@model AplikacjeWeboweAspNet.Pages.Authors.CreateModel
+@{
+    ViewData["Title"] = "Add new author";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-9 col-lg-6">
+        <h1 class="my-4">Add new author</h1>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-2 form-group">
+                <label asp-for="Author.FirstName" class="form-label"></label>
+                <input asp-for="Author.FirstName" class="form-control" />
+                <span asp-validation-for="Author.FirstName" class="text-danger"></span>
+            </div>
+            <div class="mb-2 form-group">
+                <label asp-for="Author.LastName" class="form-label"></label>
+                <input asp-for="Author.LastName" class="form-control" />
+                <span asp-validation-for="Author.LastName" class="text-danger"></span>
+            </div>
+            <div class="mb-2 form-group">
+                <label asp-for="Author.DateOfBirth" class="form-label"></label>
+                <input asp-for="Author.DateOfBirth" class="form-control" />
+                <span asp-validation-for="Author.DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="mb-2 form-group">
+                <label asp-for="Author.DateOfDeath" class="form-label"></label>
+                <input asp-for="Author.DateOfDeath" class="form-control" />
+                <span asp-validation-for="Author.DateOfDeath" class="text-danger"></span>
+            </div>
+            <div class="flex justify-content-start gap-3 mt-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a asp-page="Index" class="btn btn-outline-primary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+

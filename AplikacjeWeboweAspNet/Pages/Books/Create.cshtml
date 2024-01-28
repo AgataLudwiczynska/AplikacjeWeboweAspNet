@@ -17,8 +17,11 @@
             </div>
             <div class="mb-2 form-group">
                 <label asp-for="Book.Author" class="form-label"></label>
-                <input asp-for="Book.Author" class="form-control" />
-                <span asp-validation-for="Book.Author" class="text-danger"></span>
+                <select asp-for="Book.AuthorID" class="form-control"
+                        asp-items="@Model.AuthorNameSL">
+                    <option value="">-- Select Author --</option>
+                </select>
+                <span asp-validation-for="Book.AuthorID" class="text-danger" />
             </div>
             <div class="mb-2 form-group">
                 <label asp-for="Book.PublishingHouse" class="form-label"></label>

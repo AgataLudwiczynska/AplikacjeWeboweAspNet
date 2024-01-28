@@ -1,0 +1,35 @@
+﻿@page
+@model AplikacjeWeboweAspNet.Pages.Authors.IndexModel
+@{
+    ViewData["Title"] = "List of authors";
+}
+
+<div class="d-flex justify-content-between align-items-center my-4">
+    <h1>List of Authors</h1>
+    <a class="btn btn-primary btn-sm" asp-page="Create">New Author</a>
+</div>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ListAuthors[0].FirstName)
+            </th>
+            <th> @Html.DisplayNameFor(model => model.ListAuthors[0].LastName)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var author in Model.ListAuthors)
+        {
+            <tr>
+                <td>@author.FirstName</td>
+                <td>@author.LastName</td>
+                <td>
+                   <a asp-page="Details" asp-route-id="@author.ID" class="btn btn-outline-primary btn-sm">Details</a>
+                    <a asp-page="Edit" asp-route-id="@author.ID" class="btn btn-outline-primary btn-sm">Edit</a>
+                    <a asp-page="Delete" asp-route-id="@author.ID" class="btn btn-outline-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

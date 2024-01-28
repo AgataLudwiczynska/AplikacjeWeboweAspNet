@@ -8,8 +8,8 @@
 <h1 class="my-4">Details about book - @Model.Book.Title</h1>
 <div class="flex gap-3 mb-3">
     <a asp-page="Index" class="btn btn-outline-primary">Back to list</a>
-    <a asp-page="Edit" asp-route-id="@Model.Book.Id" class="btn btn-outline-primary">Edit</a>
-    <a asp-page="Delete" asp-route-id="@Model.Book.Id" class="btn btn-outline-danger">Delete</a>
+    <a asp-page="Edit" asp-route-id="@Model.Book.ID" class="btn btn-outline-primary">Edit</a>
+    <a asp-page="Delete" asp-route-id="@Model.Book.ID" class="btn btn-outline-danger">Delete</a>
 </div>
 <hr />
 <dl class="row">
@@ -23,7 +23,7 @@
         @Html.DisplayNameFor(model => model.Book.Author)
     </dt>
     <dd class="col-sm-10">
-        @Model.Book.Author
+        @Model.Book.Author.FirstName @Model.Book.Author.LastName
     </dd>
     <dt class="col-sm-2">
         @Html.DisplayNameFor(model => model.Book.PublishingHouse)

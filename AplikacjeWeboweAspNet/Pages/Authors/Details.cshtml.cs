@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace AplikacjeWeboweAspNet.Pages.Books
+namespace AplikacjeWeboweAspNet.Pages.Authors
 {
 	public class DetailsModel : PageModel
     {
@@ -19,23 +19,22 @@ namespace AplikacjeWeboweAspNet.Pages.Books
             _appDbContext = appDbContext;
         }
 
-        public Book Book { get; set; } = default!;
+        public Author Author { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if(id == null || _appDbContext.Books == null)
+            if(id == null || _appDbContext.Authors == null)
             {
                 return NotFound();
             }
 
-            var book = await _appDbContext.Books.Include(c => c.Author)
-                .AsNoTracking().FirstOrDefaultAsync(b => b.ID == id);
+            var author = await _appDbContext.Authors.FirstOrDefaultAsync(a => a.ID == id);
 
-            if (book == null)
+            if(author == null)
             {
                 return NotFound();
             }
-            Book = book;
+            Author = author;
             return Page();
         }
     }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AplikacjeWeboweAspNet.Pages.Books
 {
-	public class CreateModel : PageModel
+	public class CreateModel : AuthorNamePageModel
     {
         private readonly AppDbContext _appDbContext;
 
@@ -21,22 +21,31 @@ namespace AplikacjeWeboweAspNet.Pages.Books
 
         public IActionResult OnGet()
         {
+            PopulateAuthorsDropdownList(_appDbContext);
             return Page();
         }
+
         [BindProperty]
         public Book Book { get; set; } = default!;
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || _appDbContext.Books == null || Book == null)
+
+            var emptyBook = new Book();
+
+            if (await TryUpdateModelAsync<Book>(
+                 emptyBook,
+                 "book",  
+                 s => s.ID, s => s.AuthorID, s => s.Title, s => s.PublishingHouse, s => s.ReleaseDate, s => s.NumberOfPage))
             {
-                return Page();
+
+                _appDbContext.Books.Add(emptyBook);
+                await _appDbContext.SaveChangesAsync();
+                return RedirectToPage("./Index");
             }
-
-            _appDbContext.Books.Add(Book);
-            await _appDbContext.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+          
+            PopulateAuthorsDropdownList(_appDbContext, emptyBook.AuthorID);
+            return Page();
         }
     }
     

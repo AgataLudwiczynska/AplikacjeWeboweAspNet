@@ -9,9 +9,10 @@ namespace AplikacjeWeboweAspNet.Models
 {
     public class Book
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Title { get; set; }
-        public string Author { get; set; }
+        public int AuthorID { get; set; }
+        public Author? Author { get; set; }
         [Display(Name = "Release Date")]
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
