@@ -8,13 +8,31 @@
     <h1>List of Authors</h1>
     <a class="btn btn-primary btn-sm" asp-page="Create">New Author</a>
 </div>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary btn-sm" /> |
+            <a asp-page="./Index" class="btn btn-outline-primary btn-sm">Back to full List</a>
+        </p>
+    </div>
+</form>
+
 <table class="table table-hover">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ListAuthors[0].FirstName)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.FirstNameSort">
+                    @Html.DisplayNameFor(model => model.ListAuthors[0].FirstName)
+                </a>
             </th>
-            <th> @Html.DisplayNameFor(model => model.ListAuthors[0].LastName)</th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.LastNameSort">
+                    @Html.DisplayNameFor(model => model.ListAuthors[0].LastName)
+                </a>
+           </th>
             <th>Actions</th>
         </tr>
     </thead>

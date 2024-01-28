@@ -19,13 +19,45 @@ namespace AplikacjeWeboweAspNet.Pages.Authors
             _appDbContext = appDbContext;
         }
 
+        public string FirstNameSort { get; set; }
+        public string LastNameSort { get; set; }
+        public string CurrentFilter { get; set; }
+
         public IList<Author> ListAuthors { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string sortOrder, string searchString)
         {
             if(_appDbContext.Authors != null)
             {
-                ListAuthors = await _appDbContext.Authors.ToListAsync();
+                FirstNameSort = String.IsNullOrEmpty(sortOrder) ? "first_name_desc" : "";
+                LastNameSort = sortOrder == "LastName" ? "last_name_desc" : "LastName";
+
+                CurrentFilter = searchString;
+
+                IQueryable<Author> authorsIQ = from a in _appDbContext.Authors select a;
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    authorsIQ = authorsIQ.Where(a => a.LastName.Contains(searchString) || a.FirstName.Contains(searchString));
+                }
+
+                switch (sortOrder)
+                {
+                    case "first_name_desc":
+                        authorsIQ = authorsIQ.OrderByDescending(a => a.FirstName);
+                        break;
+                    case "last_name_desc":
+                        authorsIQ = authorsIQ.OrderByDescending(a => a.LastName);
+                        break;
+                    case "LastName":
+                        authorsIQ = authorsIQ.OrderBy(a => a.LastName); 
+                        break;
+                    default:
+                        authorsIQ = authorsIQ.OrderBy(a=> a.FirstName);
+                        break;
+                }
+
+                ListAuthors = await authorsIQ.ToListAsync();
             }
         }
     }

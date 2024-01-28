@@ -8,14 +8,36 @@
 <h1>List of Books</h1>
 <a class="btn btn-primary btn-sm" asp-page="Create">New Book</a>
 </div>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by title:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary btn-sm" /> |
+            <a asp-page="./Index" class="btn btn-outline-primary btn-sm">Back to full List</a>
+        </p>
+    </div>
+</form>
+
 <table class="table table-hover">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ListBooks[0].Title)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.TitleSort">
+                    @Html.DisplayNameFor(model => model.ListBooks[0].Title)
+                </a>
             </th>
-            <th> @Html.DisplayNameFor(model => model.ListBooks[0].Author)</th>
-            <th> @Html.DisplayNameFor(model => model.ListBooks[0].ReleaseDate)</th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.AuthorSort">
+                    @Html.DisplayNameFor(model => model.ListBooks[0].Author)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.ReleaseDateSort">
+                    @Html.DisplayNameFor(model => model.ListBooks[0].ReleaseDate)
+                </a>
+            </th>
             <th>Actions</th>
         </tr>
     </thead>
